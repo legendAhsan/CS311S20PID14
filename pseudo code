@@ -1,68 +1,73 @@
-TimeTableGenerator(CD[][][], as[45], 
+//
+//
+
+Time_Table_Generator(Class_Details[][][], Available_Slots[45])
+ 
 {
 	
-	FTT[][as.length]
+	Final_Time_Table[][Available_Slots.length]
 	Teachers[][45];
 	for class in dim1 of classDetails
-		ln=1;
-		int TCH =0;
-		for(int i=0; i<CD[class].lengthofdim2; i++)
+		Lecture_NO = 1;
+		int Total_Credit_Hours =0;
+		for(i=0; i<Class_Details[class].length_of_dim2; i++)
 		{
-			TCH +=CD[class][i][4];
+			Total_Credit_Hours +=Class_Details[class][i][4]
 		}
-		while(TCH>1)
+		while(Total_Credit_Hours=>1)
 			For each teacher in dim2 of classDetails[class]
-				teacherno=cd[class][teacher][2];
-				if(as[ln=0])
+				Teacher_No=cd[class][teacher][2];
+				if(availble_slots[lectureNo]==0])
 				{
-					ln++;
+					lecture_No++;
 				}
-				else if(teachers[teacherno][ln]==NULL && cd[class][teacher][4]!=0 && cd[class][teacher][5]=0)
+				else if(Teachers[Teacher_No][lecture_No]==NULL && Class_Details[class][teacher][4]!=0 && Class_Details[class][teacher][5]=0)
 				{
-					FTT[class][ln]==cd[class][teacher][1]+cd[class][teacher][3];
-					teachers[teacherno][ln]=class+cd[class][teacher][3];
-					cd[class][teacher][4]--;
-					TCH--;
-					ln++;
+					Final_Time_Table[class][lecture_No]==Class_Details[class][teacher][1]+Class_Details[class][teacher][3];
+					Teachers[Teacher_No][ln]=class+Class_Details[class][teacher][3];
+					Class_Details[class][teacher][4]--;
+					Total_Credit_Hours--;
+					lecture_No++;
 				}
-				else if(cd[class][teacher][5]=1 && cd[class][teacher][4]!=0 )
+				else if(Class_Details[class][teacher][5]=1 && Class_Details[class][teacher][4]!=0 )
 				{
-					allow=1;
-					for(i=ln; i<(ln+cd[class][teacher][4]); i++)
+					Allow=1;
+					for(i=lecture_No; i<(lecture_No+Class_Details[class][teacher][4]); i++)
 					{
-						if(teacher[teacherno][i]==!NULL or as[i]!==1)
+						if(teacher[Teacher_No][i]==!NULL or Available_Slots[i]!==1)
 						{
-							allow=0;
+							Allow=0;
 							break;
 						}
 					}
-					if(allow)
+					if(Allow)
 					{
-								for(i=ln; i<(ln+cd[class][teacher][4]); i++)
+								for(i=lecture_No; i<(lecture_No+Class_details[class][teacher][4]); i++)
 								{
-									FTT[class][i]==cd[class][teacher][1]+cd[class][teacher][3];
-									teacher[teacherno][i]=class+cd[class][teacher][3];
-									cd[class][teacher][4]--;
-									TCH--;
-									ln++;
+									Final_Time_Table[class][i]==Class_details[class][teacher][1]+Class_Details[class][teacher][3];
+									Teachers[Teacher_No][i]=class+Class_Details[class][teacher][3];
+									Class_details[class][teacher][4]--;
+									Total_Credit_Hours--;
+									lecture_No++;
 								}
 					}
 					
 				}	
 }		
-minimumRoomAllocator(FTT[class][as[length], as[45]]
+Minimum_Room_Allocator(Final_Time_Table[n][Available_Slots.length])
 {
-	for(roomno=1; roomno<=FTT dim1 lenght; i++)
+	for(Room_No=1; Room_No<=Final_Time_Table.dim1_length; Room_No++)
 	{
-		for(lectureno=1; lno<=FTT dim2 lenght; lno++)
+		for(lecture_No=1; lecture_No<=Final_Time_Table.dim2_length; lecture_No++)
 		{
-			for(int i=roomno; i<= FTT dim1 length; i++)
+			for(i=Room_No; i<= Final_Time_Table_dim1_length; i++)
 			{
-				if(as[lectureno]=1 && FTT[i][lectureno] not contain R. No &&FTT[i][lectureno]!=null && FTT[i][lectureno-1]!=FTT[i][lectureno])
-					for(int j=lectureno; j< FTT dim2 lenght; J++)	
+				if(Available_Slot[lecture_No]=1 && (Final_Time_TableT[i][Lecture_No] not contain "R. No . " ) && 
+				Final_Time_Table[i][lecture_No]!=null && Final_Time_Table[i][lecture_No-1]!=Final_Time_Table[i][lecture_No])
+					for(int j=lecture_No; j< Final_Time_Table.dim2_length; J++)	
 					{
-						FTT[i][j]+= "R. No . "+roomno;
-						if(FTT[i][j]!=FTT[i][j+1])
+						Final_Time_Table[i][j]+= "R. No . "+Room_No;
+						if(Final_Time_Table[i][j]!=Final_Time_Table[i][j+1])
 						{
 							break;
 						}
