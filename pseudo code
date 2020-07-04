@@ -50,6 +50,41 @@ TimeTableGenerator(CD[][][], as[45],
 					
 				}	
 }		
-minimumRoomAllocator(FTT[class][as[length]]
+minimumRoomAllocator(FTT[class][as[length], as[45]]
 {
+	for(roomno=1; roomno<=FTT dim1 lenght; i++)
+	{
+		for(lectureno=1; lno<=FTT dim2 lenght; lno++)
+		{
+			for(int i=roomno; i<= FTT dim1 length; i++)
+			{
+				if(as[lectureno]=1 && FTT[i][lectureno] not contain R. No &&FTT[i][lectureno]!=null && FTT[i][lectureno-1]!=FTT[i][lectureno])
+					for(int j=lectureno; j< FTT dim2 lenght; J++)	
+					{
+						FTT[i][j]+= "R. No . "+roomno;
+						if(FTT[i][j]!=FTT[i][j+1])
+						{
+							break;
+						}
+						
+						
+					}
+					break;
+			}
+		}
+		
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
