@@ -1,3 +1,4 @@
+//     Activity Schedular
 //INPUT: The input of this fuction is a 3d array of  class details and Available slots
 //       Available slots is a array of 45(or any other user input usually 45) length.
 //       We will take input of available slots in days of weak and lectures and then
