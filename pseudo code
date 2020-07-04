@@ -1,5 +1,26 @@
+//INPUT: The input of this fuction is a 3d array of  class details and Available slots
+//       Available slots is a array of 45(or any other user input usually 45) length.
+//       We will take input of available slots in days of weak and lectures and then
+//       they will be converted in this format to make the code easy.
+//		 Data that user enters, will be stored in a 3d array that will be passed to
+//       the below fuction.
+//       First dim of array consists of classes, second consists of teachers and third
+//       contains their further details. 
+//       In 3rd dim 1 index is for teacher's name, second for Teacher's specific number, 
+//       3rd for course, 4th for credit hours and fifth for weather these hours are 
+//       consective or not.
+//          Orignal project will consist on some more functionalities that will be added latter
+//          like they can be added by changing the order of recieving data.
 //
-//
+//Output: The output is a timetabble that is stored in a 2d array of Final time table.
+//        In final phase of project this will be shown attractively.
+//        
+//Priorites: The priorities of this algorthm are following
+//            First of all is to maintain minimum gap b/w the lectures of students.
+//			  secondly to maintain minimum gap b/w the lectures teachers
+// 			  then minimum use of classrooms.
+//			  Some prioities will be presented as a choice to the user i.e maximium lectures
+//			  in the start of the weak or equally distributed lectures through out the weak.
 ......................................................................................................
 Time_Table_Generator(Class_Details[][][], Available_Slots[45])
  
@@ -71,3 +92,16 @@ Minimum_Room_Allocator(Final_Time_Table[n][Available_Slots.length])
 					break;
 		
 ...............................................................................................	
+
+
+
+
+
+
+
+
+
+
+
+
+
