@@ -1,0 +1,81 @@
+The actual input on which the irations depends is total number of credit hours for each subject for each teacher for each class so,
+n= Total Number of credit hours in whole input.
+so the complexity of first few lines can maximum n. Therefore we are starting calculatng inside while loop which is runing n times.
+Time_Table_Generator(Class_Details[][][], Available_Slots[45])
+I am assuming maximum credit hours of a subject are 5
+ 
+	
+	Final_Time_Table[][Available_Slots.length]
+	Teachers[][45];
+	for class in dim1 of classDetails
+		Lecture_NO = 1;
+		int Total_Credit_Hours =0;
+		for(i=0; i<Class_Details[class].length_of_dim2; i++)
+
+			Total_Credit_Hours +=Class_Details[class][i][4]
+		
+		while(Total_Credit_Hours=>1)									
+			For each teacher in dim2 of classDetails[class]						...............n+1
+				Teacher_No=cd[class][teacher][2];						...............n
+				if(availble_slots[lectureNo]==0])						.............n
+				
+					lecture_No++;								.............n
+				
+				else if(Teachers[Teacher_No][lecture_No]==NULL && Class_Details[class][teacher][4]!=0 && Class_Details[class][teacher][5]=0)      ............n
+				
+					Final_Time_Table[class][lecture_No]==Class_Details[class][teacher][1]+Class_Details[class][teacher][3];			  ............n
+					Teachers[Teacher_No][ln]=class+Class_Details[class][teacher][3];
+					Class_Details[class][teacher][4]--;
+					Total_Credit_Hours--;
+					lecture_No++;														   ............n
+				
+				else if(Class_Details[class][teacher][5]=1 && Class_Details[class][teacher][4]!=0 )						 .............n
+				
+					Allow=1;
+					for(i=lecture_No; i<(lecture_No+Class_Details[class][teacher][4]); i++)                                                  ............ n*(5+1)
+					
+						if(teacher[Teacher_No][i]==!NULL or Available_Slots[i]!==1)                                                       ............n*(5) 
+						
+							Allow=0;
+							break;
+						
+					
+					if(Allow)														..............n
+					
+								for(i=lecture_No; i<(lecture_No+Class_details[class][teacher][4]); i++)                             ...........n*(5+1)
+								
+									Final_Time_Table[class][i]==Class_details[class][teacher][1]+Class_Details[class][teacher][3];    ........n(5)
+									Teachers[Teacher_No][i]=class+Class_Details[class][teacher][3];
+									Class_details[class][teacher][4]--;
+									Total_Credit_Hours--;
+									lecture_No++;
+								
+IF we add all of them they will be kn .... k is constant so the complexity is O(n)
+We know that n depend on number of classes, number of teachers for each class and number of credit hours, if we say them p, q r respectively then
+Complexity is O(p*q*r)
+					
+							
+Minimum_Room_Allocator(Final_Time_Table[n][Available_Slots.length])
+
+	for(Room_No=1; Room_No<=Final_Time_Table.dim1_length; Room_No++)
+	
+		for(lecture_No=1; lecture_No<=Final_Time_Table.dim2_length; lecture_No++)
+		
+			for(i=Room_No; i<= Final_Time_Table_dim1_length; i++)
+			
+				if(Available_Slot[lecture_No]=1 && (Final_Time_TableT[i][Lecture_No] not contain "R. No . " ) && 
+				Final_Time_Table[i][lecture_No]!=null && Final_Time_Table[i][lecture_No-1]!=Final_Time_Table[i][lecture_No])
+					for(int j=lecture_No; j< Final_Time_Table.dim2_length; J++)	
+					
+						Final_Time_Table[i][j]+= "R. No . "+Room_No;
+						if(Final_Time_Table[i][j]!=Final_Time_Table[i][j+1])
+						
+							break;
+						
+					break;
+In this fuction also 3rd loop is executing n( hours) times and next loop can maximum be the number of classes and third one can run maximum five times.
+We can assume that the number of classes is logn So the complexity is O(nlogn)
+We know that hours is a function of classes and and total no. of weakly lectures represented by p and q respectively.
+So Complexity O(p*q*log(P*q))
+
+
