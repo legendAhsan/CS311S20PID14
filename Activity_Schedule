@@ -1,34 +1,7 @@
- static void Minimum_Room_Allocator(string[, ] Final_Time_Table)
+static void Time_Table_Generator(int[,,] Class_Details, int[] Available_Slots)
         {
-            for (int Room_No = 1; Room_No <= Final_Time_Table.dim1_length; Room_No++)
-            {
-                for (int lecture_No = 1; lecture_No <= Final_Time_Table.dim2_length; lecture_No++)
-                {
-                    for (int i = Room_No; i <= Final_Time_Table.dim1_length; i++)
-                    {
-                        if(Available_Slot[lecture_No] = 1 && !(Final_Time_Table[i][Lecture_No].Contains("R. No . "))   && Final_Time_Table[i][lecture_No] != null && Final_Time_Table[i][lecture_No - 1] != Final_Time_Table[i][lecture_No]){
-                            for (int j = lecture_No; j < Final_Time_Table.dim2_length; J++)
-                            {
-                                Final_Time_Table[i][j] += "R. No . " + Room_No;
-                                if (Final_Time_Table[i][j] != Final_Time_Table[i][j + 1])
-                                {
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-
-
-
- static void Time_Table_Generator(int[,,] Class_Details, int[] Available_Slots)
-        {
-            string[,] Final_Time_Table;
-            string[] Teachers=new string[45];
+            int[,] Final_Time_Table;
+            int [,] Teachers=new int[,45];                                //value need to be specify
             int Total_Credit_Hours = 0;
             for (int clas=0; clas<Class_Details.GetLength(0); clas++){
                 int Lecture_NO = 1;
@@ -38,34 +11,63 @@
                 }
                 while(Total_Credit_Hours>=1){
                     for(int teach=0; teach<Class_Details.GetLength(1); teach++){
-                        Teacher_No=cd[class][teacher][2];
-                        if(availble_slots[lectureNo]==0]){
-                            lecture_No++;
+                        Teacher_No= Class_Details[clas,teach,2];
+                        if(Available_Slots[Lecture_NO]==0){
+                            Lecture_NO++;
                         }
-                        else if(Teachers[Teacher_No][lecture_No]==NULL && Class_Details[class][teacher] [4]!=0 && Class_Details[class][teacher] [5]=0){
-                            Final_Time_Table[class][lecture_No]==Class_Details[class][teacher] [1]+Class_Details[class][teacher] [3];
-                            Teachers[Teacher_No][ln]=class+Class_Details[class][teacher] [3];
-                            Class_Details[class][teacher] [4]--;
+                        else if(Teachers[Teacher_No, Lecture_NO] ==null && Class_Details[clas,teach,4]!=0 && Class_Details[clas,teach,5]=0){
+                            Final_Time_Table[clas, Lecture_NO] =Class_Details[clas,teach,1]+Class_Details[clas,teach,3];
+                            Teachers[Teacher_No, Lecture_NO] =clas+Class_Details[clas,teach,3];          // ln kya hai
+                            Class_Details[clas,teach,4]--;
 					        Total_Credit_Hours--;
-					        lecture_No++;
+                            Lecture_NO++;
                         }
-                        else if(Class_Details[class][teacher] [5]=1 && Class_Details[class][teacher] [4]!=0 ){
-                            Allow=1;
-					        for(i=lecture_No; i<(lecture_No+Class_Details[class][teacher] [4]); i++){
-                                if(teacher[Teacher_No][i]==!NULL or Available_Slots[i]!==1){
-                                    Allow=0;
+                        else if(Class_Details[clas, teach, 5] = 1 && Class_Details[clas, teach, 4]!= 0 ){
+                            bool Allow=true;
+					        for(int i= ; i<(Lecture_NO + Class_Details[clas, teach, 4]); i++){
+                                if(Teachers[Teacher_No,i]!=null || Available_Slots[i]!=1){         // yaki
+                                    Allow = false;
 							        break;
                                 }
                             }
                             if(Allow){
-                                for(i=lecture_No; i<(lecture_No+Class_details[class][teacher] [4]); i++){
-                                    Final_Time_Table[class][i]==Class_details[class][teacher] [1]+Class_Details[class][teacher] [3];
-									Teachers[Teacher_No][i]=class+Class_Details[class][teacher] [3];
-									Class_details[class][teacher] [4]--;
+                                for(int i= Lecture_NO; i<(Lecture_NO + Class_Details[clas,teach,4]); i++){
+                                    Final_Time_Table[clas,i]=Class_Details[clas,teach,1]+Class_Details[clas,teach,3];
+									Teachers[Teacher_No][i]=clas+Class_Details[clas,teach,3];
+									Class_Details[clas,teach,4]--;
 									Total_Credit_Hours--;
-									lecture_No++;
+                                    Lecture_NO++;
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+    
+
+
+        static void Minimum_Room_Allocator(string[] args, string[, ] Final_Time_Table)
+        {
+            for (int Room_No = 1; Room_No <= Final_Time_Table.GetLength(0); Room_No++)
+            {
+                for (int lecture_No = 1; lecture_No <= Final_Time_Table.GetLength(1); lecture_No++)
+                {
+                    for (int i = Room_No; i <= Final_Time_Table.GetLength(0); i++)
+                    {
+                        if(Available_Slot[lecture_No] = 1 && !(Final_Time_Table[i, lecture_No].Contains("R. No . "))   && Final_Time_Table[i][lecture_No] != null && Final_Time_Table[i][lecture_No - 1] != Final_Time_Table[i][lecture_No]){
+                            for (int j = lecture_No; j < Final_Time_Table.GetLength(1); j++)
+                            {
+                                Final_Time_Table[i,j] += "R. No . " + Room_No;
+                                if (Final_Time_Table[i,j] != Final_Time_Table[i,j + 1])
+                                {
+                                    break;
+                                }
+                            }
+                            break;
                         }
                     }
                 }
