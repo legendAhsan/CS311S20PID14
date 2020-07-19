@@ -1,41 +1,56 @@
-static void Time_Table_Generator(int[,,] Class_Details, int[] Available_Slots)
+ static string[,] Time_Table_Generator(string[,,] Class_Details, int[] Available_Slots)
         {
-            int[,] Final_Time_Table;
-            int [,] Teachers=new int[,45];                                //value need to be specify
+        
+            string [,] Final_Time_Table = new string [12, 45];
+            string [,] Teachers = new string[100, 45];                              
             int Total_Credit_Hours = 0;
-            for (int clas=0; clas<Class_Details.GetLength(0); clas++){
+            for (int clas = 0; clas < Class_Details.GetLength(0); clas++)
+            {
                 int Lecture_NO = 1;
 
-                for(int i=0; i< Class_Details.GetLength(1); i++){
-                    Total_Credit_Hours +=  Class_Details[clas,i,4];
+                for (int i = 0; i < Class_Details.GetLength(1); i++)
+                {
+                    Total_Credit_Hours += int.Parse(Class_Details[clas, i, 4]);
                 }
-                while(Total_Credit_Hours>=1){
-                    for(int teach=0; teach<Class_Details.GetLength(1); teach++){
-                        Teacher_No= Class_Details[clas,teach,2];
-                        if(Available_Slots[Lecture_NO]==0){
+                while (Total_Credit_Hours >= 1)
+                {
+                    for (int teach = 0; teach < Class_Details.GetLength(1); teach++)
+                    {
+                        int Teacher_No = int.Parse(Class_Details[clas, teach, 2]);
+                        if (Available_Slots[Lecture_NO] == 0)
+                        {
                             Lecture_NO++;
                         }
-                        else if(Teachers[Teacher_No, Lecture_NO] ==null && Class_Details[clas,teach,4]!=0 && Class_Details[clas,teach,5]=0){
-                            Final_Time_Table[clas, Lecture_NO] =Class_Details[clas,teach,1]+Class_Details[clas,teach,3];
-                            Teachers[Teacher_No, Lecture_NO] =clas+Class_Details[clas,teach,3];          // ln kya hai
-                            Class_Details[clas,teach,4]--;
-					        Total_Credit_Hours--;
+                        else if ((Teachers[Teacher_No, Lecture_NO] == null) && (int.Parse(Class_Details[clas, teach, 4]) != 0) && (int.Parse(Class_Details[clas, teach, 5]) == 0))
+                        {
+                            Final_Time_Table[clas, Lecture_NO] = Class_Details[clas, teach, 1] + Class_Details[clas, teach, 3];
+                            Teachers[Teacher_No, Lecture_NO] = clas.ToString() + Class_Details[clas, teach, 3];         
+                            int t = int.Parse(Class_Details[clas, teach, 4]) - 1;
+                            Class_Details[clas, teach, 4]=   t.ToString();
+                            Total_Credit_Hours--;
                             Lecture_NO++;
                         }
-                        else if(Class_Details[clas, teach, 5] = 1 && Class_Details[clas, teach, 4]!= 0 ){
-                            bool Allow=true;
-					        for(int i= ; i<(Lecture_NO + Class_Details[clas, teach, 4]); i++){
-                                if(Teachers[Teacher_No,i]!=null || Available_Slots[i]!=1){         // yaki
+                        else if (int.Parse(Class_Details[clas, teach, 5]) ==1 && int.Parse(Class_Details[clas, teach, 4]) != 0)
+                        {
+                            bool Allow = true;
+                            for (int i = Lecture_NO; i < (Lecture_NO + int.Parse(Class_Details[clas, teach, 4])); i++)
+                            {
+                                if (Teachers[Teacher_No, i] != null || Available_Slots[i] != 1)
+                                {        
                                     Allow = false;
-							        break;
+                                    break;
                                 }
                             }
-                            if(Allow){
-                                for(int i= Lecture_NO; i<(Lecture_NO + Class_Details[clas,teach,4]); i++){
-                                    Final_Time_Table[clas,i]=Class_Details[clas,teach,1]+Class_Details[clas,teach,3];
-									Teachers[Teacher_No][i]=clas+Class_Details[clas,teach,3];
-									Class_Details[clas,teach,4]--;
-									Total_Credit_Hours--;
+                            if (Allow)
+                            {
+                                for (int i = Lecture_NO; i < (Lecture_NO + int.Parse(Class_Details[clas, teach, 4])); i++)
+                                {
+                                    Final_Time_Table[clas, i] = Class_Details[clas, teach, 1] + Class_Details[clas, teach, 3];
+                                    Teachers[Teacher_No, i] = clas + Class_Details[clas, teach, 3];
+                                    int t = int.Parse(Class_Details[clas, teach, 4]) - 1;
+                                    Class_Details[clas, teach, 4] = t.ToString();
+                                  //  Class_Details[clas, teach, 4]--;
+                                    Total_Credit_Hours--;
                                     Lecture_NO++;
                                 }
                             }
@@ -43,6 +58,7 @@ static void Time_Table_Generator(int[,,] Class_Details, int[] Available_Slots)
                     }
                 }
             }
+            return Final_Time_Table;
         }
 
 
