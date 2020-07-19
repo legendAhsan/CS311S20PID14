@@ -66,7 +66,7 @@
     
 
 
-        static void Minimum_Room_Allocator(string[] args, string[, ] Final_Time_Table)
+         static string[,] Minimum_Room_Allocator(string[,] Final_Time_Table)
         {
             for (int Room_No = 1; Room_No <= Final_Time_Table.GetLength(0); Room_No++)
             {
@@ -74,11 +74,12 @@
                 {
                     for (int i = Room_No; i <= Final_Time_Table.GetLength(0); i++)
                     {
-                        if(Available_Slot[lecture_No] = 1 && !(Final_Time_Table[i, lecture_No].Contains("R. No . "))   && Final_Time_Table[i][lecture_No] != null && Final_Time_Table[i][lecture_No - 1] != Final_Time_Table[i][lecture_No]){
+                        if (!(Final_Time_Table[i, lecture_No].Contains("R. No . ")) && Final_Time_Table[i, lecture_No] != null && Final_Time_Table[i, lecture_No - 1] != Final_Time_Table[i, lecture_No])
+                        {
                             for (int j = lecture_No; j < Final_Time_Table.GetLength(1); j++)
                             {
-                                Final_Time_Table[i,j] += "R. No . " + Room_No;
-                                if (Final_Time_Table[i,j] != Final_Time_Table[i,j + 1])
+                                Final_Time_Table[i, j] += "R. No . " + Room_No;
+                                if (Final_Time_Table[i, j] != Final_Time_Table[i, j + 1])
                                 {
                                     break;
                                 }
@@ -88,4 +89,5 @@
                     }
                 }
             }
+            return Final_Time_Table;
         }
