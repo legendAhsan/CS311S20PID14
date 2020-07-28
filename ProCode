@@ -12,24 +12,26 @@ namespace TimeCode
     {
         static void Main(string[] args)
         {
-            string[,,] cd = new string [2,2,6] { { { "  ", "ALI", "1", "CS1", "3","0" }, {"  ", "Ahmad", "2", "CqS1", "2","0" } },
-
-                                               { {"  ", "Shoiab", "3", "CS1", "3","1" }, { "  ","Kamran", "4", "CSSS", "2","0" } } };
-         //   int[] myNumbers = { 5, 1, 8, 9 };
-            int [] asd = { 1, 1, 1, 1, 1, 0, 1, 1, 1, 0 };
+            string[,,] cd = new string[3, 7, 5] { 
+                                                { { "AminaSafar", "0", "Operating System", "3","0" }, { "Samyan Wahla", "1", "Analysis Of algoritham", "3","0" }, {"Atif","2","Database","3","0" }, {"Tauqir", "3","TAF","3","0" },  {"Laeeq khan", "4","DB LAB","3","1" },  {"Mairya", "5","OSLAB","2","1" },  {"Mam Rubina", "6","MC","2","0" } },
+                                               { { "AminaSafar", "0", "Operating System", "3","0" }, { "Samyan Wahla", "1", "Analysis Of algoritham", "3","0" }, {"Dr Awais","7","Database","3","0" }, {"Tauqir", "3","TAF","3","0" },  {"Laeeq khan", "4","DB LAB","3","1" },  {"Mairya", "5","OSLAB","2","1" },  {"Dr Hafeez", "8","MC","2","0" } },
+                                              { { "AminaSafar", "0", "Operating System", "3","0" }, { "Samyan Wahla", "1", "Analysis Of algoritham", "3","0" }, {"Dr Awais","7","Database","3","0" }, {"Tauqir", "3","TAF","3","0" },  {"Laeeq khan", "4","DB LAB","3","1" },  {"Mairya", "5","OSLAB","2","1" },  {"Madam Samiya", "6","MC","2","0" } }
+                                                };
+            //   int[] myNumbers = { 5, 1, 8, 9 };
+            int[] asd = { 1, 1, 1, 1, 0, 1,1,1,0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0 };
             string[,] aa = Time_Table_Generator(cd, asd);
- 
+
             for (int q = 0; q < 3; q++)
-                for (int w = 0; w < 9; w++)
+                for (int w = 0; w < 45; w++)
                 {
-                   // aa[q, w] += "ok" + " ";
-                    Console.WriteLine(aa[q, w]);
+                    // aa[q, w] += "ok" + " ";
+                    Console.WriteLine(aa[q, w]+"       ---- Lecture");
                 }
             aa = Minimum_Room_Allocator(aa);
-            for (int q = 0; q < 10; q++)
-                for (int w = 0; w < 20; w++)
+            for (int q = 0; q < 3; q++)
+                for (int w = 0; w < 45; w++)
                 {
-                 //   aa[q, w] += "ok" + " ";
+                    //   aa[q, w] += "ok" + " ";
                     Console.WriteLine(aa[q, w]);
                 }
 
@@ -39,118 +41,174 @@ namespace TimeCode
         }
         static string[,] Time_Table_Generator(string[,,] Class_Details, int[] Available_Slots)
         {
-           // string [,] Final_Time_Table;
-            string [,] Final_Time_Table = new string [12, 45];
-            string [,] Teachers = new string[50, 45];                                //value need to be specify
+            // string [,] Final_Time_Table;
+            string[,] Final_Time_Table = new string[12, 45];
+            string[,] Teachers = new string[50, 45];                                //value need to be specify
+            int[] Class_Available_Slots = new int[Available_Slots.Length];
+
+
             for (int q = 0; q < 50; q++)
                 for (int w = 0; w < 45; w++)
-                    Teachers[q, w] = "P";
+                    Teachers[q, w] = "None";
             int Total_Credit_Hours = 0;
             int Teacher_No;
             bool Allow;
             for (int clas = 0; clas < Class_Details.GetLength(0); clas++)
             {
+               // Class_Available_Slots = Available_Slots;
+               for(int g=0; g<Available_Slots.Length; g++)
+                {
+                    Class_Available_Slots[g] = Available_Slots[g];
+                }
                 Total_Credit_Hours = 0;
                 //Console.WriteLine("end1fgfgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg");
-                int Lecture_NO = 1;
+                int Lecture_NO = 0;
 
                 for (int i = 0; i < Class_Details.GetLength(1); i++)
                 {
-                    Total_Credit_Hours += int.Parse(Class_Details[clas, i, 4]);
-                //    Console.WriteLine(int.Parse(Class_Details[clas, i, 4]));
+                    Total_Credit_Hours += int.Parse(Class_Details[clas, i, 3]);
+                    //    Console.WriteLine(int.Parse(Class_Details[clas, i, 4]));
                 }
                 while (Total_Credit_Hours >= 1)
                 {
-                    Console.WriteLine(Total_Credit_Hours);
+                   //Console.WriteLine(Total_Credit_Hours);
                     //Console.WriteLine("end1");
                     for (int teach = 0; teach < Class_Details.GetLength(1); teach++)
                     {
-      
-                        Teacher_No = int.Parse(Class_Details[clas, teach, 2]);
-                   //     Console.WriteLine("end2");
-                        if (Available_Slots[Lecture_NO] == 0)
+
+                        Teacher_No = int.Parse(Class_Details[clas, teach, 1]);
+                           //  Console.WriteLine("end2");
+                        if ((Class_Available_Slots[Lecture_NO] == 0 || (Teachers[Teacher_No, Lecture_NO] != "None") && (Lecture_NO < Class_Available_Slots.Length - 1)))
                         {
                             Lecture_NO++;
-                       //     Console.WriteLine("end222");
+                            teach--;
+                            continue;
+                            //    Console.WriteLine("end222");
                         }
-                     //   (string.IsNullOrEmpty(Teachers[Teacher_No, Lecture_NO])
                        
-                        else if (((Teachers[Teacher_No, Lecture_NO]=="P")) && (int.Parse(Class_Details[clas, teach, 4]) != 0) && (int.Parse(Class_Details[clas, teach, 5]) == 0))
+
+                  
+
+                        if (((Teachers[Teacher_No, Lecture_NO] == "None")) && (int.Parse(Class_Details[clas, teach, 3]) != 0) && (int.Parse(Class_Details[clas, teach, 4]) == 0))
                         {
-                       //     Console.WriteLine("end222");
-                            Final_Time_Table[clas, Lecture_NO] = Class_Details[clas, teach, 1] + Class_Details[clas, teach, 3];
-                            Teachers[Teacher_No, Lecture_NO] = clas.ToString() + "---" +Class_Details[clas, teach, 3];          // ln kya hai
-                            int t = int.Parse(Class_Details[clas, teach, 4]) - 1;
-                            Class_Details[clas, teach, 4]=   t.ToString();
+                            //     Console.WriteLine("end222");
+                            Final_Time_Table[clas, Lecture_NO] = Class_Details[clas, teach, 0] + ","+ Class_Details[clas, teach, 2];
+                            Teachers[Teacher_No, Lecture_NO] = clas.ToString() + "---" + Class_Details[clas, teach, 2];          // ln kya hai
+                            int t = int.Parse(Class_Details[clas, teach, 3]) - 1;
+                            Class_Details[clas, teach, 3] = t.ToString();
                             Total_Credit_Hours--;
-                            Lecture_NO++;
-                        }
-                        else if (int.Parse(Class_Details[clas, teach, 5]) ==1 && int.Parse(Class_Details[clas, teach, 4]) != 0)
-                        {
-                          //  Console.WriteLine("end222");
-                            Allow = true;
-                            for (int i = Lecture_NO; i < (Lecture_NO + int.Parse(Class_Details[clas, teach, 4])); i++)
+                            Class_Available_Slots[Lecture_NO] = 0;
+                            if (Lecture_NO < Class_Available_Slots.Length - 1)
                             {
-                                
-                                if ((Teachers[Teacher_No, i] != "P") || (Available_Slots[i] != 1))
-                                {         // yaki
+                                Lecture_NO++;
+                            }
+                            else
+                            {
+                                Lecture_NO = 0;
+                            }
+                            
+                        }
+                        else if (int.Parse(Class_Details[clas, teach, 4]) == 1 && int.Parse(Class_Details[clas, teach, 3]) != 0)
+                        {
+                            //  Console.WriteLine("end222");
+                            Allow = true;
+                            if((Lecture_NO + int.Parse(Class_Details[clas, teach, 3]) < Class_Available_Slots.Length))
+                            for (int i = Lecture_NO; i < (Lecture_NO + int.Parse(Class_Details[clas, teach, 3])); i++)
+                            {
+
+                                if ((Teachers[Teacher_No, i] != "None") || (Class_Available_Slots[i] != 1))
+                                {         
                                     Allow = false;
-                                    Console.WriteLine("endeeeeeeeeeeeeeeeeeeeeeeee211122");
+                                   // Console.WriteLine("endeeeeeeeeeeeeeeeeeeeeeeee211122");
                                     break;
                                 }
                             }
                             if (Allow)
                             {
-                                for (int i = Lecture_NO; i < (Lecture_NO + int.Parse(Class_Details[clas, teach, 4])); i++)
+                                for (int i = Lecture_NO; i < (Lecture_NO + int.Parse(Class_Details[clas, teach, 3])); i++)
                                 {
-                                    Final_Time_Table[clas, i] = Class_Details[clas, teach, 1] + Class_Details[clas, teach, 3];
-                                    Teachers[Teacher_No, i] = clas + "---" +Class_Details[clas, teach, 3];
-                                    int t = int.Parse(Class_Details[clas, teach, 4]) - 1;
-                                    Class_Details[clas, teach, 4] = t.ToString();
-                                  //  Console.WriteLine("end211122");
+                                    Final_Time_Table[clas, i] = Class_Details[clas, teach, 0] + "," + Class_Details[clas, teach, 2];
+                                    Teachers[Teacher_No, i] = clas + "---" + Class_Details[clas, teach, 2];
+                                    int t = int.Parse(Class_Details[clas, teach, 3]) - 1;
+                                    Class_Details[clas, teach, 3] = t.ToString();
+                                    //  Console.WriteLine("end211122");
                                     Total_Credit_Hours--;
-                                    Lecture_NO++;
+                                    Class_Available_Slots[Lecture_NO] = 0;
+                                    if (Lecture_NO < Class_Available_Slots.Length - 1)
+                                    {
+                                        Lecture_NO++;
+                                    }
+                                    else
+                                    {
+                                        Lecture_NO = 0;
+                                    }
+
                                 }
                             }
                         }
                     }
+               //
                 }
             }
-            Console.WriteLine("end");
+         //   Console.WriteLine("end");
             return Final_Time_Table;
         }
         static string[,] Minimum_Room_Allocator(string[,] Final_Time_Table)
         {
             int m;
-            for (int q = 0; q < Final_Time_Table.GetLength(0); q++)
-                for (int w = 0; w < Final_Time_Table.GetLength(1); w++)
+             for (int q = 0; q < Final_Time_Table.GetLength(0); q++)
+              for (int w = 0; w < Final_Time_Table.GetLength(1); w++)
                 {
-                    Final_Time_Table[q, w] += "cvbnm";
-                }
+                    Final_Time_Table[q, w] += "//";
+                } 
 
             for (int Room_No = 0; Room_No < Final_Time_Table.GetLength(0); Room_No++)
             {
-                for (int lecture_No = 1; lecture_No < Final_Time_Table.GetLength(1); lecture_No++)
+                for (int lecture_No = 0; lecture_No < Final_Time_Table.GetLength(1); lecture_No++)
                 {
                     for (int i = Room_No; i < Final_Time_Table.GetLength(0); i++)
                     {
-                        if (!(Final_Time_Table[i, lecture_No].Contains("R. No . ")) && Final_Time_Table[i, lecture_No] != null && Final_Time_Table[i, lecture_No - 1] != Final_Time_Table[i, lecture_No])
+                        if(lecture_No==0)
                         {
-                            for (int j = lecture_No; j < Final_Time_Table.GetLength(1); j++)
+                            if (!(Final_Time_Table[i, lecture_No].Contains("R. No . ")) && Final_Time_Table[i, lecture_No] != "//")
                             {
-                                Final_Time_Table[i, j] += "R. No . " + Room_No;
-                                m = j + 1;
-                                if(m == Final_Time_Table.GetLength(1))
+                                for (int j = lecture_No; j < Final_Time_Table.GetLength(1); j++)
                                 {
-                                    break;
+                                    Final_Time_Table[i, j] += "R. No . " + Room_No;
+                                    m = j + 1;
+                                    if (m == Final_Time_Table.GetLength(1))
+                                    {
+                                        break;
+                                    }
+                                    if (Final_Time_Table[i, j] != Final_Time_Table[i, m])
+                                    {
+                                        break;
+                                    }
                                 }
-                                if (Final_Time_Table[i, j] != Final_Time_Table[i, m])
-                                {
-                                    break;
-                                }
+                                break;
                             }
-                            break;
                         }
+                        else
+                        {
+                            if (!(Final_Time_Table[i, lecture_No].Contains("R. No . ")) && Final_Time_Table[i, lecture_No] != "//" && Final_Time_Table[i, lecture_No - 1] != Final_Time_Table[i, lecture_No])
+                            {
+                                for (int j = lecture_No; j < Final_Time_Table.GetLength(1); j++)
+                                {
+                                    Final_Time_Table[i, j] += "R. No . " + Room_No;
+                                    m = j + 1;
+                                    if (m == Final_Time_Table.GetLength(1))
+                                    {
+                                        break;
+                                    }
+                                    if (Final_Time_Table[i, j] != Final_Time_Table[i, m])
+                                    {
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        
                     }
                 }
             }
