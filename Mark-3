@@ -201,6 +201,7 @@ namespace TimeCode
                         Total_Credit_Hours += int.Parse(Class_Details[clas][i, 3]);
                         //    Console.WriteLine(int.Parse(Class_Details[clas, i, 4]));
                     }
+                    TCH = Total_Credit_Hours;
                     while (Total_Credit_Hours >= 1)
                     {
                         //Console.WriteLine(Total_Credit_Hours);
@@ -306,6 +307,7 @@ namespace TimeCode
         static string[,] Minimum_Room_Allocator(string[,] Final_Time_Table)
         {
             int m;
+            int Trsss = 0;
             for (int q = 0; q < Final_Time_Table.GetLength(0); q++)
                 for (int w = 0; w < Final_Time_Table.GetLength(1); w++)
                 {
