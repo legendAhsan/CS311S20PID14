@@ -12,18 +12,20 @@ namespace TimeCode
     {
         static void Main(string[] args)
         {
-            string[,,] cd = new string[3, 7, 5] {
-                                                { { "AminaSafar", "0", "Operating System", "3","0" }, { "Samyan Wahla", "1", "Analysis Of algoritham", "3","0" }, {"Atif","2","Database","3","0" }, {"Tauqir", "3","TAF","3","0" },  {"Laeeq khan", "4","DB LAB","3","1" },  {"Mairya", "5","OSLAB","0","1" },  {"Mam Rubina", "6","MC","2","0" } },
-                                               { { "AminaSafar", "0", "Operating System", "3","0" }, { "Samyan Wahla", "1", "Analysis Of algoritham", "3","0" }, {"Dr Awais","7","Database","3","0" }, {"Tauqir", "3","TAF","3","0" },  {"Laeeq khan", "4","DB LAB","3","1" },  {"Mairya", "5","OSLAB","0","1" },  {"Dr Hafeez", "8","MC","2","0" } },
-                                              { { "AminaSafar", "0", "Operating System", "3","0" }, { "Samyan Wahla", "1", "Analysis Of algoritham", "3","0" }, {"Dr Awais","7","Database","3","0" }, {"Tauqir", "3","TAF","3","0" },  {"Laeeq khan", "4","DB LAB","3","1" },  {"Mairya", "5","OSLAB","0","1" },  {"Madam Samiya", "6","MC","2","0" } }
-                                                };
-            //   int[] myNumbers = { 5, 1, 8, 9 };
-            int[] asd = { 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0 };
-            string[,] aa = Time_Table_Generator(cd, asd);
+            string[][,] cd1 = new string[][,]
+            {
+                new string[ , ]  { { "AminaSafar", "0", "Operating System", "3","0" }, { "Samyan Wahla", "1", "Analysis Of algoritham", "3","0" }, {"Atif","2","Database","3","0" }, {"Tauqir", "3","TAF","3","0" },  {"Laeeq khan", "4","DB LAB","3","1" },  {"Mairya", "5","OSLAB","0","1" },  {"Mam Rubina", "6","MC","2","0" } },
+                new string[ , ] { { "AminaSafar", "0", "Operating System", "3","0" }, { "Samyan Wahla", "1", "Analysis Of algoritham", "3","0" }, {"Dr Awais","7","Database","3","0" }, {"Tauqir", "3","TAF","3","0" },  {"Laeeq khan", "4","DB LAB","3","1" },  {"Mairya", "5","OSLAB","02","1" } },
+                new string[ , ]  { { "AminaSafar", "0", "Operating System", "3","0" }, { "Samyan Wahla", "1", "Analysis Of algoritham", "3","0" }, {"Dr Awais","7","Database","3","0" }, {"Tauqir", "3","TAF","3","0" },  {"Laeeq khan", "4","DB LAB","3","1" },  {"Mairya", "5","OSLAB","0","1" },  {"Madam Samiya", "6","MC","2","0" } }
+            };
+          //  Console.WriteLine(cd1[2].GetLength(0));
 
-            int ii;
-            ii = 1;
-            Console.WriteLine(ii - 5);
+
+
+            
+            int[] asd = { 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0 };
+            string[,] aa = Time_Table_Generator(cd1, asd);
+
       
             for (int q = 0; q < 3; q++)
             {
@@ -46,9 +48,10 @@ namespace TimeCode
             }
             
             Console.WriteLine(5/2);
+            
             Console.ReadKey();
         }
-        static string[,] Time_Table_Generator(string[,,] Class_Details, int[] Available_Slots)
+        static string[,] Time_Table_Generator(string[][,] Class_Details, int[] Available_Slots)
         {
             // string [,] Final_Time_Table;
             string[,] Final_Time_Table = new string[12, 45];
@@ -75,16 +78,16 @@ namespace TimeCode
                     //Console.WriteLine("end1fgfgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg");
                     int Lecture_NO = 0;
 
-                    for (int i = 0; i < Class_Details.GetLength(1); i++)
+                    for (int i = 0; i < Class_Details[clas].GetLength(0); i++)
                     {
-                        Total_Credit_Hours += int.Parse(Class_Details[clas, i, 3]);
+                        Total_Credit_Hours += int.Parse(Class_Details[clas][ i, 3]);
                         //    Console.WriteLine(int.Parse(Class_Details[clas, i, 4]));
                     }
                     while (Total_Credit_Hours >= 1)
                     {
                         //Console.WriteLine(Total_Credit_Hours);
                         //Console.WriteLine("end1");
-                        for (int teach = 0; teach < Class_Details.GetLength(1); teach++)
+                        for (int teach = 0; teach < Class_Details[clas].GetLength(0); teach++)
                         {
 
                             if (Lecture_NO == 45)
@@ -92,7 +95,7 @@ namespace TimeCode
                                 Lecture_NO = 0;
                             }
 
-                            Teacher_No = int.Parse(Class_Details[clas, teach, 1]);
+                            Teacher_No = int.Parse(Class_Details[clas] [teach, 1]);
                             //  Console.WriteLine("end2");
                             if ((Class_Available_Slots[Lecture_NO] == 0 || (Teachers[Teacher_No, Lecture_NO] != "None") && (Lecture_NO < Class_Available_Slots.Length - 1)))
                             {
@@ -105,13 +108,13 @@ namespace TimeCode
 
 
 
-                            if (((Teachers[Teacher_No, Lecture_NO] == "None")) && (int.Parse(Class_Details[clas, teach, 3]) != 0) && (int.Parse(Class_Details[clas, teach, 4]) == 0))
+                            if (((Teachers[Teacher_No, Lecture_NO] == "None")) && (int.Parse(Class_Details[clas][teach, 3]) != 0) && (int.Parse(Class_Details[clas][teach, 4]) == 0))
                             {
                                 //     Console.WriteLine("end222");
-                                Final_Time_Table[clas, Lecture_NO] = Class_Details[clas, teach, 0] + "," + Class_Details[clas, teach, 2];
-                                Teachers[Teacher_No, Lecture_NO] = clas.ToString() + "---" + Class_Details[clas, teach, 2];          // ln kya hai
-                                int t = int.Parse(Class_Details[clas, teach, 3]) - 1;
-                                Class_Details[clas, teach, 3] = t.ToString();
+                                Final_Time_Table[clas, Lecture_NO] = Class_Details[clas][teach, 0] + "," + Class_Details[clas][teach, 2];
+                                Teachers[Teacher_No, Lecture_NO] = clas.ToString() + "---" + Class_Details[clas][teach, 2];          // ln kya hai
+                                int t = int.Parse(Class_Details[clas][teach, 3]) - 1;
+                                Class_Details[clas][teach, 3] = t.ToString();
                                 Total_Credit_Hours--;
                                 Class_Available_Slots[Lecture_NO] = 0;
                                 if (Lecture_NO < Class_Available_Slots.Length - 1)
@@ -124,13 +127,13 @@ namespace TimeCode
                                 }
 
                             }
-                            else if (int.Parse(Class_Details[clas, teach, 4]) == 1 && int.Parse(Class_Details[clas, teach, 3]) != 0)
+                            else if (int.Parse(Class_Details[clas][teach, 4]) == 1 && int.Parse(Class_Details[clas][teach, 3]) != 0)
                             {
                                 //  Console.WriteLine("end222");
                                 Allow = true;
-                                if ((Lecture_NO + int.Parse(Class_Details[clas, teach, 3]) < Class_Available_Slots.Length))
+                                if ((Lecture_NO + int.Parse(Class_Details[clas][teach, 3]) < Class_Available_Slots.Length))
                                 {
-                                    for (int i = Lecture_NO; i < (Lecture_NO + int.Parse(Class_Details[clas, teach, 3])); i++)
+                                    for (int i = Lecture_NO; i < (Lecture_NO + int.Parse(Class_Details[clas][teach, 3])); i++)
                                     {
 
                                         if ((Teachers[Teacher_No, i] != "None") || (Class_Available_Slots[i] != 1))
@@ -148,12 +151,12 @@ namespace TimeCode
                                 }
                                 if (Allow)
                                 {
-                                    for (int i = Lecture_NO; i < (Lecture_NO + int.Parse(Class_Details[clas, teach, 3])); i++)
+                                    for (int i = Lecture_NO; i < (Lecture_NO + int.Parse(Class_Details[clas][teach, 3])); i++)
                                     {
-                                        Final_Time_Table[clas, i] = Class_Details[clas, teach, 0] + "," + Class_Details[clas, teach, 2];
-                                        Teachers[Teacher_No, i] = clas + "---" + Class_Details[clas, teach, 2];
-                                        int t = int.Parse(Class_Details[clas, teach, 3]) - 1;
-                                        Class_Details[clas, teach, 3] = t.ToString();
+                                        Final_Time_Table[clas, i] = Class_Details[clas] [teach, 0] + "," + Class_Details[clas][teach, 2];
+                                        Teachers[Teacher_No, i] = clas + "---" + Class_Details[clas][teach, 2];
+                                        int t = int.Parse(Class_Details[clas][teach, 3]) - 1;
+                                        Class_Details[clas][teach, 3] = t.ToString();
                                         //  Console.WriteLine("end211122");
                                         Total_Credit_Hours--;
                                         Class_Available_Slots[Lecture_NO] = 0;
@@ -185,16 +188,16 @@ namespace TimeCode
                     //Console.WriteLine("end1fgfgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg");
                     int Lecture_NO = Class_Available_Slots.Length-1;
 
-                    for (int i = 0; i < Class_Details.GetLength(1); i++)
+                    for (int i = 0; i < Class_Details[clas].GetLength(0); i++)
                     {
-                        Total_Credit_Hours += int.Parse(Class_Details[clas, i, 3]);
+                        Total_Credit_Hours += int.Parse(Class_Details[clas][i, 3]);
                         //    Console.WriteLine(int.Parse(Class_Details[clas, i, 4]));
                     }
                     while (Total_Credit_Hours >= 1)
                     {
                         //Console.WriteLine(Total_Credit_Hours);
                         //Console.WriteLine("end1");
-                        for (int teach = 0; teach < Class_Details.GetLength(1); teach++)
+                        for (int teach = 0; teach < Class_Details[clas].GetLength(0); teach++)
                         {
 
                             if (Lecture_NO == -1)
@@ -202,7 +205,7 @@ namespace TimeCode
                                 Lecture_NO = Class_Available_Slots.Length-1;
                             }
 
-                            Teacher_No = int.Parse(Class_Details[clas, teach, 1]);
+                            Teacher_No = int.Parse(Class_Details[clas][teach, 1]);
                             //  Console.WriteLine("end2");
                             if ((Class_Available_Slots[Lecture_NO] == 0 || (Teachers[Teacher_No, Lecture_NO] != "None") && (Lecture_NO >= 1)))
                             {
@@ -215,13 +218,13 @@ namespace TimeCode
 
 
 
-                            if (((Teachers[Teacher_No, Lecture_NO] == "None")) && (int.Parse(Class_Details[clas, teach, 3]) != 0) && (int.Parse(Class_Details[clas, teach, 4]) == 0))
+                            if (((Teachers[Teacher_No, Lecture_NO] == "None")) && (int.Parse(Class_Details[clas][teach, 3]) != 0) && (int.Parse(Class_Details[clas][teach, 4]) == 0))
                             {
                                 //     Console.WriteLine("end222");
-                                Final_Time_Table[clas, Lecture_NO] = Class_Details[clas, teach, 0] + "," + Class_Details[clas, teach, 2];
-                                Teachers[Teacher_No, Lecture_NO] = clas.ToString() + "---" + Class_Details[clas, teach, 2];          // ln kya hai
-                                int t = int.Parse(Class_Details[clas, teach, 3]) - 1;
-                                Class_Details[clas, teach, 3] = t.ToString();
+                                Final_Time_Table[clas, Lecture_NO] = Class_Details[clas][teach, 0] + "," + Class_Details[clas][teach, 2];
+                                Teachers[Teacher_No, Lecture_NO] = clas.ToString() + "---" + Class_Details[clas][teach, 2];          // ln kya hai
+                                int t = int.Parse(Class_Details[clas][teach, 3]) - 1;
+                                Class_Details[clas][teach, 3] = t.ToString();
                                 Total_Credit_Hours--;
                                 Class_Available_Slots[Lecture_NO] = 0;
                                 if (Lecture_NO >= 1)
@@ -234,13 +237,13 @@ namespace TimeCode
                                 }
 
                             }
-                            else if (int.Parse(Class_Details[clas, teach, 4]) == 1 && int.Parse(Class_Details[clas, teach, 3]) != 0)
+                            else if (int.Parse(Class_Details[clas][teach, 4]) == 1 && int.Parse(Class_Details[clas][teach, 3]) != 0)
                             {
                                 //  Console.WriteLine("end222");
                                 Allow = true;
-                                if ((Lecture_NO - int.Parse(Class_Details[clas, teach, 3]) >= -1))
+                                if ((Lecture_NO - int.Parse(Class_Details[clas][teach, 3]) >= -1))
                                 {
-                                    for (int i = Lecture_NO; i > (Lecture_NO - int.Parse(Class_Details[clas, teach, 3])); i--)
+                                    for (int i = Lecture_NO; i > (Lecture_NO - int.Parse(Class_Details[clas][teach, 3])); i--)
                                     {
 
                                         if ((Teachers[Teacher_No, i] != "None") || (Class_Available_Slots[i] != 1))
@@ -258,12 +261,12 @@ namespace TimeCode
                                 }
                                 if (Allow)
                                 {
-                                    for (int i = Lecture_NO; i > (Lecture_NO - int.Parse(Class_Details[clas, teach, 3])); i--)
+                                    for (int i = Lecture_NO; i > (Lecture_NO - int.Parse(Class_Details[clas][teach, 3])); i--)
                                     {
-                                        Final_Time_Table[clas, i] = Class_Details[clas, teach, 0] + "," + Class_Details[clas, teach, 2];
-                                        Teachers[Teacher_No, i] = clas + "---" + Class_Details[clas, teach, 2];
-                                        int t = int.Parse(Class_Details[clas, teach, 3]) - 1;
-                                        Class_Details[clas, teach, 3] = t.ToString();
+                                        Final_Time_Table[clas, i] = Class_Details[clas][teach, 0] + "," + Class_Details[clas][teach, 2];
+                                        Teachers[Teacher_No, i] = clas + "---" + Class_Details[clas][teach, 2];
+                                        int t = int.Parse(Class_Details[clas][teach, 3]) - 1;
+                                        Class_Details[clas][teach, 3] = t.ToString();
                                         //  Console.WriteLine("end211122");
                                         Total_Credit_Hours--;
                                         Class_Available_Slots[Lecture_NO] = 0;
