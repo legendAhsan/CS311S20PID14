@@ -83,7 +83,7 @@ namespace TimeCode
 
                         if(Lecture_NO==45)
                         {
-                            Lecture_NO = 1;
+                            Lecture_NO = 0;
                         }
                                
                         Teacher_No = int.Parse(Class_Details[clas, teach, 1]);
