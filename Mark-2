@@ -18,15 +18,15 @@ namespace TimeCode
                 new string[ , ] { { "AminaSafar", "0", "Operating System", "3","0" }, { "Samyan Wahla", "1", "Analysis Of algoritham", "3","0" }, {"Dr Awais","7","Database","3","0" }, {"Tauqir", "3","TAF","3","0" },  {"Laeeq khan", "4","DB LAB","3","1" },  {"Mairya", "5","OSLAB","02","1" } },
                 new string[ , ]  { { "AminaSafar", "0", "Operating System", "3","0" }, { "Samyan Wahla", "1", "Analysis Of algoritham", "3","0" }, {"Dr Awais","7","Database","3","0" }, {"Tauqir", "3","TAF","3","0" },  {"Laeeq khan", "4","DB LAB","3","1" },  {"Mairya", "5","OSLAB","0","1" },  {"Madam Samiya", "6","MC","2","0" } }
             };
-          //  Console.WriteLine(cd1[2].GetLength(0));
+            //  Console.WriteLine(cd1[2].GetLength(0));
 
 
 
-            
+
             int[] asd = { 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0 };
             string[,] aa = Time_Table_Generator(cd1, asd);
 
-      
+
             for (int q = 0; q < 3; q++)
             {
                 for (int w = 0; w < 45; w++)
@@ -46,9 +46,9 @@ namespace TimeCode
                 }
                 Console.WriteLine("............................................................");
             }
-            
-            Console.WriteLine(5/2);
-            
+
+            Console.WriteLine(5 / 2);
+
             Console.ReadKey();
         }
         static string[,] Time_Table_Generator(string[][,] Class_Details, int[] Available_Slots)
@@ -67,7 +67,7 @@ namespace TimeCode
             bool Allow;
             for (int clas = 0; clas < Class_Details.GetLength(0); clas++)
             {
-                if (clas <= (Class_Details.GetLength(0) / 2))
+                if (clas%2==0)
                 {
                     // Class_Available_Slots = Available_Slots;
                     for (int g = 0; g < Available_Slots.Length; g++)
@@ -80,7 +80,7 @@ namespace TimeCode
 
                     for (int i = 0; i < Class_Details[clas].GetLength(0); i++)
                     {
-                        Total_Credit_Hours += int.Parse(Class_Details[clas][ i, 3]);
+                        Total_Credit_Hours += int.Parse(Class_Details[clas][i, 3]);
                         //    Console.WriteLine(int.Parse(Class_Details[clas, i, 4]));
                     }
                     while (Total_Credit_Hours >= 1)
@@ -95,7 +95,7 @@ namespace TimeCode
                                 Lecture_NO = 0;
                             }
 
-                            Teacher_No = int.Parse(Class_Details[clas] [teach, 1]);
+                            Teacher_No = int.Parse(Class_Details[clas][teach, 1]);
                             //  Console.WriteLine("end2");
                             if ((Class_Available_Slots[Lecture_NO] == 0 || (Teachers[Teacher_No, Lecture_NO] != "None") && (Lecture_NO < Class_Available_Slots.Length - 1)))
                             {
@@ -153,7 +153,7 @@ namespace TimeCode
                                 {
                                     for (int i = Lecture_NO; i < (Lecture_NO + int.Parse(Class_Details[clas][teach, 3])); i++)
                                     {
-                                        Final_Time_Table[clas, i] = Class_Details[clas] [teach, 0] + "," + Class_Details[clas][teach, 2];
+                                        Final_Time_Table[clas, i] = Class_Details[clas][teach, 0] + "," + Class_Details[clas][teach, 2];
                                         Teachers[Teacher_No, i] = clas + "---" + Class_Details[clas][teach, 2];
                                         int t = int.Parse(Class_Details[clas][teach, 3]) - 1;
                                         Class_Details[clas][teach, 3] = t.ToString();
@@ -186,7 +186,7 @@ namespace TimeCode
                     }
                     Total_Credit_Hours = 0;
                     //Console.WriteLine("end1fgfgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg");
-                    int Lecture_NO = Class_Available_Slots.Length-1;
+                    int Lecture_NO = Class_Available_Slots.Length - 1;
 
                     for (int i = 0; i < Class_Details[clas].GetLength(0); i++)
                     {
@@ -202,7 +202,7 @@ namespace TimeCode
 
                             if (Lecture_NO == -1)
                             {
-                                Lecture_NO = Class_Available_Slots.Length-1;
+                                Lecture_NO = Class_Available_Slots.Length - 1;
                             }
 
                             Teacher_No = int.Parse(Class_Details[clas][teach, 1]);
@@ -233,7 +233,7 @@ namespace TimeCode
                                 }
                                 else
                                 {
-                                    Lecture_NO = Class_Available_Slots.Length-1;
+                                    Lecture_NO = Class_Available_Slots.Length - 1;
                                 }
 
                             }
@@ -289,17 +289,17 @@ namespace TimeCode
                 }
 
             }
-         //   Console.WriteLine("end");
+            //   Console.WriteLine("end");
             return Final_Time_Table;
         }
         static string[,] Minimum_Room_Allocator(string[,] Final_Time_Table)
         {
             int m;
-             for (int q = 0; q < Final_Time_Table.GetLength(0); q++)
-              for (int w = 0; w < Final_Time_Table.GetLength(1); w++)
+            for (int q = 0; q < Final_Time_Table.GetLength(0); q++)
+                for (int w = 0; w < Final_Time_Table.GetLength(1); w++)
                 {
                     Final_Time_Table[q, w] += "//";
-                } 
+                }
 
             for (int Room_No = 0; Room_No < Final_Time_Table.GetLength(0); Room_No++)
             {
@@ -307,7 +307,7 @@ namespace TimeCode
                 {
                     for (int i = Room_No; i < Final_Time_Table.GetLength(0); i++)
                     {
-                        if(lecture_No==0)
+                        if (lecture_No == 0)
                         {
                             if (!(Final_Time_Table[i, lecture_No].Contains("R. No . ")) && Final_Time_Table[i, lecture_No] != "//")
                             {
@@ -347,7 +347,7 @@ namespace TimeCode
                                 break;
                             }
                         }
-                        
+
                     }
                 }
             }
