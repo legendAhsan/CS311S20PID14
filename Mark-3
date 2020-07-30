@@ -92,13 +92,13 @@ namespace TimeCode
                         //Console.WriteLine("end1");
                         for (int teach = 0; teach < Class_Details[clas].GetLength(0); teach++)
                         {
-              
-                            if(rnd.Next(1, 100) < (Class_Available_Slots.Length-10-TCH))
+
+                            if (rnd.Next(1, 100) < (99-TCH))
                             {
                                 Lecture_NO++;
                             }
-                            
-                            if (Lecture_NO == 45)
+
+                            if (Lecture_NO >= 45)
                             {
                                 Lecture_NO = 0;
                             }
@@ -208,11 +208,11 @@ namespace TimeCode
                         //Console.WriteLine("end1");
                         for (int teach = 0; teach < Class_Details[clas].GetLength(0); teach++)
                         {
-                            if (rnd.Next(1, 100) < (Class_Available_Slots.Length - 10 - TCH))
+                            if (rnd.Next(1, 100) < (99 - TCH))
                             {
                                 Lecture_NO--;
                             }
-                            if (Lecture_NO == -1)
+                            if (Lecture_NO <= -1)
                             {
                                 Lecture_NO = Class_Available_Slots.Length - 1;
                             }
